@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.3",
+  "options":{
+    "info": {
+      "title": "Movies API 3.0",
+      "description": "Movies API",
+      "contact": {
+        "email": "aku@mail.com"
+      },
+      "version": "1.0.11"
+    }
+  },
+  
+  "servers": [
+    {
+      "url": "http://localhost/3000"
+    }
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "summary": "find all movies",
+        "tags": [
+          "games"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful find movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Movie",
+        "tags": [
+          "games"
+        ],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Create New Movies",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{movieId}": {
+      "get": {
+        "summary": "find by",
+        "tags": [
+          "games"
+        ],
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "access_token",
+            "in": "header",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful find movie by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 2003
+          },
+          "title": {
+            "type": "string",
+            "example": "Pengabdi Mantan"
+          },
+          "genres": {
+            "type": "string",
+            "example": "Horror"
+          },
+          "year": {
+            "type": "string",
+            "example": 2022
+          }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Successful"
+          }
+        }
+      }
+    }
+  }
+}
